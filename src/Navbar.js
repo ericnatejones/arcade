@@ -9,6 +9,7 @@ export default function Navbar() {
             <Link to="/snake">snake</Link>
             <Link to="/frogger">frogger</Link>
             <Link to="/mine-sweeper">mine sweeper</Link>
+            <Link to="/master-mind">master mind</Link>
         </div>
     )
 }

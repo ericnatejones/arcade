@@ -1,5 +1,5 @@
 import React, {useState, useCallback, useEffect} from 'react'
-import { buildGrid, findEmpties, emptyGrid } from "../assets/grid"
+import { buildGrid, findEmpties, emptyGrid } from "../assets/mineGrid"
 import Cell from "./Cell"
 import Options from "./Options"
 

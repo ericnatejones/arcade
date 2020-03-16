@@ -13,12 +13,12 @@ export default function SnakeContainer(props) {
     const [isHorizontal, setIsHorizontal] = useState(true)
     const [cols, setCols] = useState(50)
     const [rows, setRows] = useState(50)
-    const [speed, setSpeed] = useState(2)
+    const [speed, setSpeed] = useState(100)
 
 
     useInterval(() => {
         tick()
-    }, speed^2)
+    }, speed^.5)
 
     useEffect(() => {
         setTail(prevTail => [head, ...prevTail.slice(0, prevTail.length - 1)])

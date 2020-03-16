@@ -4,7 +4,8 @@ import {Route, Switch} from 'react-router-dom'
 import Navbar from './Navbar';
 import SnakeContainer from './snake/index';
 import MineSweeper from './mineSweeper';
-import Grid from './snake/Grid'
+import MasterMind from './masterMind';
+
 function App() {
   return (
     <div>
@@ -14,13 +15,16 @@ function App() {
           home
         </Route>
         <Route path="/snake">
-          <SnakeContainer grid={<Grid />}/>
+          <SnakeContainer/>
         </Route>
         <Route path="/frogger">
           frogger
         </Route>
         <Route path="/mine-sweeper">
           <MineSweeper/>
+        </Route>
+        <Route path="/master-mind">
+          <MasterMind/>
         </Route>
       </Switch>
     </div>

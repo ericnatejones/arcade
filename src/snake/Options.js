@@ -7,7 +7,7 @@ export default function Options(props) {
         <div>
             <div>
                 Speed:
-                <input type="range" min="3" max="100"
+                <input type="range" min="1" max="200"
                 className="reversedRange" value={props.speed}
                 onChange={(e)=>props.setSpeed(e.target.value)}/>
             </div>
