@@ -2,9 +2,9 @@ import React from 'react';
 import './App.css';
 import {Route, Switch} from 'react-router-dom'
 import Navbar from './Navbar';
-import Snake from './snake/index';
+import SnakeContainer from './snake/index';
 import MineSweeper from './mineSweeper';
-
+import Grid from './snake/Grid'
 function App() {
   return (
     <div>
@@ -14,7 +14,7 @@ function App() {
           home
         </Route>
         <Route path="/snake">
-          <Snake/>
+          <SnakeContainer grid={<Grid />}/>
         </Route>
         <Route path="/frogger">
           frogger

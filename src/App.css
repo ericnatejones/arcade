@@ -1,5 +1,4 @@
 .cell {
-  border: solid black 1px;
   background-color: black;
   position: absolute;
   height: 10px;
@@ -9,6 +8,14 @@
 .snake-board {
   display: grid;
 
+}
+
+.snake-board > div {
+  border: 1px solid grey
+}
+
+.reversedRange {
+  direction: rtl
 }
 
 .flex-container {

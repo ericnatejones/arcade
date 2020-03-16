@@ -1,19 +1,24 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import {useInterval} from "../hooks/useInterval"
-import Cell from './Cell'
+import Food from './Food'
+import Snake from './Snake'
+import Options from './Options'
+import Grid from './Grid'
 
-export default function Snake() {
+export default function SnakeContainer(props) {
     const [head, setHead] = useState({x:0, y:3})
     const [food, setFood] = useState({x:4, y:2})
     const [tail, setTail] = useState([{x:0, y:2}, {x:0, y:1}, {x:0, y:0}])
     const [direction, setDirection] = useState("right")
     const [isHorizontal, setIsHorizontal] = useState(true)
-    const [cols] = useState(70)
-    const [rows] = useState(70)
+    const [cols, setCols] = useState(50)
+    const [rows, setRows] = useState(50)
+    const [speed, setSpeed] = useState(2)
+
 
     useInterval(() => {
         tick()
-    }, 10)
+    }, speed^2)
 
     useEffect(() => {
         setTail(prevTail => [head, ...prevTail.slice(0, prevTail.length - 1)])
@@ -42,6 +47,14 @@ export default function Snake() {
         return () => window.removeEventListener("keydown", handleKeyPress);
     }, [handleKeyPress])
 
+    const reset = () => {
+        setHead({x:0, y:3})
+        setFood({x:5, y:5})
+        setTail([{x:0, y:3}, {x:0, y:2}, {x:0, y:1  }])
+        setDirection("right")
+        setIsHorizontal(true)
+    }
+
     const tick = () => {
         console.log("tick")
         if(head.x === food.x && head.y === food.y){
@@ -57,13 +70,18 @@ export default function Snake() {
             setFood(tryFoodSet)
         }
         if(head.x >= cols || head.x < 0 || head.y >= rows || head.y < 0){
-            setHead({x:0, y:3})
-            setFood({x:5, y:5})
-            setTail([{x:0, y:3}, {x:0, y:2}, {x:0, y:1  }])
-            setDirection("right")
-            setIsHorizontal(true)
-            return
+           reset()
+           return
         }
+        const hasHitTail = tail.some(({x, y}, i)=> {
+            if(i === 0) return false
+            return x === head.x && y === head.y
+        })
+        if(hasHitTail){
+            reset()
+            return 
+        }
+
         switch(direction){
             case "down":
                 setHead(({x, y}) => ({x:x+1, y}))
@@ -88,38 +106,16 @@ export default function Snake() {
         
     }
 
-    const grid = []
-
-    for(let i = 0; i < cols; i++){
-        const newColumn = []
-        for(let j  = 0; j < rows; j++){
-            let cellType = "blank"
-            const isTail = tail.some(({x, y}) => x === i && y === j)
-            if(head.x === i && head.y === j){
-                cellType = "head"
-            } else if (food.x === i && food.y === j){
-                cellType = "food"
-            } else if (isTail){
-                cellType = "tail"
-            }   
-            
-            newColumn.push(<Cell key={i+j} cellType={cellType}/>)
-        }
-        grid.push(newColumn)
-    }
-
-    const style = {
-        gridTemplateColumns: `repeat(${cols}, 10px)`,
-        gridTemplateRows: `repeat(${rows}, 10px)`
-    }
-
     return (
+        <>
+        <Options setCols={setCols} setRows={setRows} setSpeed={setSpeed} speed={speed}/>
         <div className="flex-container">
-            <div className="snake-board" style={style}>
-                {grid}
+            <div style={{position: "relative"}}>
+                <Grid cols={cols} rows={rows}/>
+                <Snake cells={[head, ...tail]}/>
+                <Food food={food}/>
             </div>
         </div>
+        </>
     )
 }
-
-

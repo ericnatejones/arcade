@@ -1,4 +1,17 @@
-export function buildGrid(colsLength, rowsLength, numberOfMines, clickedX, clickedY){
+export function emptyGrid(colsLength, rowsLength) {
+    const grid = []
+
+    for(let i = 0; i < colsLength; i++){
+        grid.push([])
+        for(let j = 0; j < rowsLength; j++){
+            grid[i].push({isRevealed: false })
+        }
+    }  
+
+    return grid
+}
+
+export function buildGrid(colsLength, rowsLength, numberOfMines, clickedX, clickedY, setGrid){
     const grid = []
 
     for(let i = 0; i < colsLength; i++){
@@ -56,8 +69,7 @@ export function buildGrid(colsLength, rowsLength, numberOfMines, clickedX, click
             grid[i][j].numberOfSurrounding = totalMines
         }
     }
-
-    return grid
+    findEmpties(clickedX, clickedY, grid, setGrid)
 }
 
 export function findEmpties(x, y, grid, setGrid){
@@ -83,3 +95,4 @@ export function findEmpties(x, y, grid, setGrid){
     findEmpties(x - 1, y - 1, grid, setGrid)      
     setGrid(grid)
 }
+ 

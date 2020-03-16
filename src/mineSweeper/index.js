@@ -1,9 +1,9 @@
-import React, {useState, useCallback} from 'react'
-import {buildGrid, findEmpties} from "../assets/grid"
+import React, {useState, useCallback, useEffect} from 'react'
+import { buildGrid, findEmpties, emptyGrid } from "../assets/grid"
 import Cell from "./Cell"
 import Options from "./Options"
 
-const builtGrid = buildGrid(15, 15, 20)
+const builtGrid = emptyGrid(15, 15, 20)
 
 export default function MineSweeper() {
     const [grid, setGrid] = useState(builtGrid)
@@ -22,36 +22,55 @@ export default function MineSweeper() {
             setGameOver(true)
             return false
         } else {
-            handleReset(x, y)
+            handleReset()
             return true
         }
     }
 
-    const handleReset = (x, y) => {
-        setTotalRevealed(0)
+    const handleReset = () => {
         setGameOver(false)
-        setGrid(buildGrid(options.cols, options.rows, options.numberOfMines, x, y))
+        setTotalRevealed(0)
+        setGrid(builtGrid)
     }
 
     const handleClick = (x, y) => {
-        const gridCopy = [...grid.map(row => [...row])]
-        setTotalRevealed(preTotal => preTotal + 1)
-        console.log(gridCopy)
-        findEmpties(x, y, gridCopy, setGrid)
-        if(totalRevealed >= (options.cols * options.rows) - options.numberOfMines){
-            if(!gameOver){
-                alert("wiiiiner")
-                setGameOver(true)
-            }
+        if(totalRevealed === 0){
+            buildGrid(options.cols, options.rows, options.numberOfMines, x, y, setGrid)
+        } else {
+            const gridCopy = [...grid.map(row => [...row])]
+            console.log(gridCopy)
+            findEmpties(x, y, gridCopy, setGrid)
+            
+        }
+        if(!grid[x][y].isRevealed){         
+            setTotalRevealed(preTotal => preTotal + 1)
         }
     }
 
+    let totalCount = 0
+
     const mappedGrid = grid.map((col, x) => {
         return col.map((cell, y) => {
-            if(gameOver) cell.isRevealed = true
+            let isRevealed = cell.isRevealed
+
+            if(isRevealed){
+                totalCount++
+            }
+            
+            if(totalCount >= (options.cols * options.rows) - options.numberOfMines){
+                if(!gameOver){
+                    alert("wiiiiner")
+                    setGameOver(true)
+                }
+            }
+
+            if(gameOver) {
+                isRevealed = true
+            }
+
             return <Cell    howMany={cell.numberOfSurrounding} 
                             hasMine={cell.hasMine} 
-                            isRevealed={cell.isRevealed}
+                            isRevealed={isRevealed}
                             x={x} y={y}
                             handleClick={handleClick}
                             handleMineClick={handleMineClick}
