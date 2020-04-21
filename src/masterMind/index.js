@@ -9,10 +9,14 @@ export default function MasterMind() {
     const [guesses, setGuesses] = useState([])
     const [clues, setClues] = useState([])
 
+    const handleSubmit = (guess) => {
+        setGuesses(prevGuesses => [...prevGuesses, guess])
+    }
+
     return (
         <>
         <div className="master-mind-board">
-            <Guesses/>
+            <Guesses submitGuess={handleSubmit}/>
             <Clues/>
         </div>
         <ColorSelector/>
