@@ -14,21 +14,33 @@ export default function MasterMind() {
 
     const handleSubmit = (guess) => {
         console.log(guess)
+        console.log(solution)
+        let blacksNeededToWin = 4
         const newClues = []
-       
+        const solutionCopy = [...solution]
+        const guessCopy = [...guess]
         for(let i = 0; i < guess.length; i++){
-           
-            if(guess[i] === solution[i]){
+            if(guessCopy[i] === solutionCopy[i]){
                 newClues.push("black")
-                
-            } else if(solution.includes(guess[i]) && guess[i] !== solution[i]){
-                newClues.push("white")
-            }
-           
-            console.log(newClues)
-
+                solutionCopy[i] = "counted"
+                guessCopy[i] = "counted"
+                blacksNeededToWin--  
+            } 
         }
-        clues.sort()
+        for(let i = 0; i < guessCopy.length; i++){
+           if(solutionCopy.includes(guessCopy[i]) && solutionCopy[i] !== "counted"){
+                newClues.push("white")
+                guessCopy[i] = "counted"
+                const index = solutionCopy.indexOf(guessCopy[i])
+                solutionCopy[index] = "counted"
+            }
+            console.log(solutionCopy)
+            console.log(guessCopy)
+            console.log(newClues)
+        }
+        if(newClues.length === 0){
+            newClues.push("no clue")
+        }
         setClues(prevClues => [...prevClues, newClues])
         setGuesses(prevGuesses => [...prevGuesses, guess])
     }
@@ -37,7 +49,7 @@ export default function MasterMind() {
         <>
         <div className="master-mind-board">
             <Guesses submitGuess={handleSubmit} guesses={guesses}/>
-            <Clues/>
+            <Clues clues={clues}/>
         </div>
         </>
     )

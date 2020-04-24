@@ -79,3 +79,7 @@
   width: 30px;
   display: inline-block;
 }
+
+.clue {
+  border: 1px solid black;
+}
