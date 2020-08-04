@@ -1,3 +1,4 @@
+/* This is a the worst CSS I've ever seen. And other helpful feedback */
 .cell {
   background-color: black;
   position: absolute;
@@ -7,15 +8,14 @@
 
 .snake-board {
   display: grid;
-
 }
 
 .snake-board > div {
-  border: 1px solid grey
+  border: 1px solid grey;
 }
 
 .reversedRange {
-  direction: rtl
+  direction: rtl;
 }
 
 .flex-container {
@@ -43,12 +43,11 @@
 
 .mine-grid > div > button {
   background-color: gray;
-  box-shadow: inset 6px 6px 0px -4px rgba(0,0,0,0.75);
+  box-shadow: inset 6px 6px 0px -4px rgba(0, 0, 0, 0.75);
   height: 22px;
   width: 26px;
   font-weight: 900;
   font-size: 18px;
-
 }
 
 .master-mind-board {
@@ -60,7 +59,7 @@
 }
 
 .master-mind-board > div {
-  border: 1px solid black
+  border: 1px solid black;
 }
 
 .select {
