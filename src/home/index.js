@@ -4,7 +4,7 @@ import React from 'react'
 export default function index() {
     return (
         <div>
-            yo my dawgs, welcome to the arcade. Frogger is Nate's. Master mind is a work in progress. Mine Sweeper works, but has some kinks that are difficult to figure out. Snake is sick af. 
+            yo my dawgs, welcome to the arcade. Frogger is Nate's. Master mind is a work in progress. Mine Sweeper works, but has some kinks that are difficult to figure out. Snake is sick af, and way easier to build in vanilla js. But this is the React Arcade! React games only! 
             {/* <Tile game="" notes="" image={}/>
             <Tile game="" notes="" image={}/>
             <Tile game="" notes="" image={}/>
