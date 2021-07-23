@@ -2,15 +2,26 @@ import React, {useState, useEffect} from 'react'
 import {createSolution} from "../assets/masterMind"
 import Guesses from './Guesses'
 import Clues from './Clues'
+import OpeningAnimation from './OpeningAnimation'
 
 export default function MasterMind() {
     const [solution, setSolution] = useState(createSolution())
     const [guesses, setGuesses] = useState([])
     const [clues, setClues] = useState([])
+    const [turns, setTurns] = useState(0)
+    const [hasWon, setHasWon] = useState(false)
 
     useEffect(()=>{
-        setSolution(createSolution)
-    }, [])
+        if(hasWon){
+            alert("you won in " + turns + " turns")
+            setSolution(createSolution())
+            setClues([])
+            setGuesses([])
+            setTurns(0)
+            setSolution(createSolution())
+            setHasWon(false)
+        }
+    }, [hasWon, turns])
 
     const handleSubmit = (guess) => {
         console.log(guess)
@@ -28,10 +39,10 @@ export default function MasterMind() {
             } 
         }
         for(let i = 0; i < guessCopy.length; i++){
-           if(solutionCopy.includes(guessCopy[i]) && solutionCopy[i] !== "counted"){
+            const index = solutionCopy.indexOf(guessCopy[i])
+            if(solutionCopy.includes(guessCopy[i]) && solutionCopy[index] !== "counted"){
                 newClues.push("white")
                 guessCopy[i] = "counted"
-                const index = solutionCopy.indexOf(guessCopy[i])
                 solutionCopy[index] = "counted"
             }
             console.log(solutionCopy)
@@ -41,16 +52,22 @@ export default function MasterMind() {
         if(newClues.length === 0){
             newClues.push("no clue")
         }
+        if(blacksNeededToWin === 0){
+            setHasWon(true)
+        }
+
         setClues(prevClues => [...prevClues, newClues])
         setGuesses(prevGuesses => [...prevGuesses, guess])
+        setTurns(prevTurns => prevTurns + 1)
     }
 
     return (
         <>
-        <div className="master-mind-board">
-            <Guesses submitGuess={handleSubmit} guesses={guesses}/>
-            <Clues clues={clues}/>
-        </div>
+            <OpeningAnimation/>
+            <div className="master-mind-board">
+                <Guesses submitGuess={handleSubmit} guesses={guesses}/>
+                <Clues clues={clues}/>
+            </div>
         </>
     )
 }

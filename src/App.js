@@ -1,10 +1,12 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import './App.css'
 import {Route, Switch} from 'react-router-dom'
-import Navbar from './Navbar';
-import SnakeContainer from './snake/index';
-import MineSweeper from './mineSweeper';
-import MasterMind from './masterMind';
+import Navbar from './Navbar'
+import SnakeContainer from './snake/index'
+import MineSweeper from './mineSweeper'
+import MasterMind from './masterMind'
+import Frogger from './frogger'
+import Home from './home'
 
 function App() {
   return (
@@ -12,13 +14,13 @@ function App() {
       <Navbar/>
       <Switch>
         <Route exact path="/">
-          home
+          <Home/>
         </Route>
         <Route path="/snake">
           <SnakeContainer/>
         </Route>
         <Route path="/frogger">
-          frogger
+          <Frogger/>
         </Route>
         <Route path="/mine-sweeper">
           <MineSweeper/>
@@ -28,7 +30,7 @@ function App() {
         </Route>
       </Switch>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

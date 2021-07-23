@@ -5,8 +5,9 @@ export default function Guess(props) {
 
     const colors = ["red", "purple", "blue", "green", "yellow", "orange", "black"]
 
-    const options = colors.map(color => {
+    const options = colors.map((color, i) => {
         return <div 
+                key={i}
                 onClick={()=>props.onChange(color, props.guess)} 
                 style={{backgroundColor: color}} className="option">
             </div>
@@ -18,6 +19,8 @@ export default function Guess(props) {
 
     const style = {
         backgroundColor: props.color,
+        borderShadow: "5%",
+        boxShadow: "2px 5px 5px black"
     }
 
     const optionsContainerStyle = {
@@ -26,7 +29,7 @@ export default function Guess(props) {
     }
 
     return (
-        <div className="select" name="0" 
+        <div className="select spacer" name="0" 
             onClick={handleClick}
             style={style}>
             <div style={optionsContainerStyle}>{options}</div>

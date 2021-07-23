@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useEffect} from 'react'
+import React, {useState, useCallback} from 'react'
 import { buildGrid, findEmpties, emptyGrid } from "../assets/mineGrid"
 import Cell from "./Cell"
 import Options from "./Options"
@@ -14,6 +14,7 @@ export default function MineSweeper() {
     const handleOptionsChange = useCallback((options) => {
         setOptions(options)
         setGameOver(true)
+        setGrid(builtGrid)
     }, [])
 
     const handleMineClick = (x, y) => {
@@ -51,6 +52,7 @@ export default function MineSweeper() {
 
     const mappedGrid = grid.map((col, x) => {
         return col.map((cell, y) => {
+            console.log(options)
             let isRevealed = cell.isRevealed
 
             if(isRevealed){

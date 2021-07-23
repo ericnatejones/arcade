@@ -54,7 +54,6 @@
 .master-mind-board {
   display: grid;
   grid-template-columns: 4fr 1fr;
-  grid-template-rows: 100px 100px;
   width: 50%;
   margin: auto;
 }
@@ -82,4 +81,15 @@
 
 .clue {
   border: 1px solid black;
+}
+
+.spacer {
+  margin: 0 20px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin: 10px;
 }

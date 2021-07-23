@@ -18,15 +18,16 @@ export default function Guesses(props) {
         })
     }
 
-    const lockedInGuesses = props.guesses.map(guess => {
-        return <div>{guess.map(color => <div 
-            style={{backgroundColor: color}} className="option set">
+    const lockedInGuesses = props.guesses.map((guess, i) => {
+        return <div key={i}>{guess.map((color, i) => <div 
+            style={{backgroundColor: color}} className="option set spacer" key={i}>
         </div>)}</div>
     })
 
     return (
         <div>
             {lockedInGuesses}
+            <hr></hr>
             <Guess onChange={handleChange} guess="0" color={guesses[0]}/>
             <Guess onChange={handleChange} guess="1" color={guesses[1]}/>
             <Guess onChange={handleChange} guess="2" color={guesses[2]}/>

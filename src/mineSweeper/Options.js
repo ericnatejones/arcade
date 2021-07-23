@@ -45,15 +45,18 @@ export default function Options({handleOptionsChange}) {
             <button onClick={()=>setIsHidden(false)}>show options</button> :
             <>
             <div>
-                <label>Columns
+                <label>
+                    <div>Columns: {cols}</div>
                     4
                     <input value={cols} type="range" min="4"
                         onChange={handleColsChange}/>
                     100
                 </label>
+                
             </div>
             <div>
-                <label>Rows
+                <label>
+                <div>Rows: {rows}</div>
                     4
                     <input value={rows} type="range" min="4"
                         onChange={handleRowsChange}/>
@@ -61,7 +64,8 @@ export default function Options({handleOptionsChange}) {
                 </label>
             </div> 
             <div>  
-                <label>Number of Mines
+                <label>
+                <div>Number of Mines: {numberOfMines}</div>
                     1
                     <input max={((cols -1) * (rows -1)) + 5} min="1"
                     value={numberOfMines} type="range" 
