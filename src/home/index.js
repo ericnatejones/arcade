@@ -11,7 +11,7 @@ export default function index() {
             <p>
             If you're part of Code Pals, and have discovered this, a great game for you to work on to display as your own is:
           
-    <a href="https://react-mancala.netlify.app/" target="_blank" class="arcade-link">mancala</a>
+    <a href="https://react-mancala.netlify.app/" rel="noopener noreferrer" target="_blank" class="arcade-link">mancala</a>
             </p>
             <p>
                 this page itself needs work, and the comments below show my intentions. Students of mine can use it for practice, and potential employers of mine can use it to see how responsive I have to feedback and direction. 
