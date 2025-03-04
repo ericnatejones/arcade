@@ -90,7 +90,7 @@ export default function MineSweeper() {
                 style={{gridTemplateColumns:`repeat(${options.cols}, 30px)`}}>
                 {mappedGrid}
             </div>
-            {gameOver && <button onClick={handleReset}>reset</button>}
+            {gameOver && <button onClick={handleReset}>start</button>}
         </div>
     )
 }

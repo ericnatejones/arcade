@@ -10,7 +10,8 @@ class Log extends React.Component {
         x: 0,
         forward: true,
         firstLoad: true,
-        onWood: false
+        onWood: false,
+        intervalId: null // Store the interval ID
     }
 
     /*Checks for collisions on every update.  Y is determined in parent's logY object which are 100px apart.*/
@@ -29,15 +30,26 @@ class Log extends React.Component {
         if(this.state.firstLoad){
             velocity = Math.floor(Math.random() * (200 - 100)) + 100;
             let randomX = Math.floor(Math.random() * (210 - 50)) + 50;
+            
+            // Store the interval ID in state so we can clear it later
+            const intervalId = setInterval(this.logMovement, velocity);
+            
             this.setState({
                 y: this.props.logY,
                 x: randomX,
-                firstLoad: false
-            })
-            setInterval(this.logMovement, velocity);
+                firstLoad: false,
+                intervalId: intervalId // Save the interval ID
+            });
         }
     }
-
+    
+    // Clean up the interval when component unmounts
+    componentWillUnmount() {
+        // Clear the interval to prevent memory leaks
+        if (this.state.intervalId) {
+            clearInterval(this.state.intervalId);
+        }
+    }
 
     logMovement = () => {
         if(this.state.x < 235 && this.state.forward){

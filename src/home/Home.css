@@ -1,0 +1,387 @@
+/* CSS for Home Component - Scoped to avoid affecting other components */
+.home-component .arcade-container * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Variables kept at root level for potential reuse */
+:root {
+    --neon-pink: #ff00ff;
+    --neon-blue: #00ffff;
+    --neon-green: #39ff14;
+    --neon-yellow: #ffff00;
+    --neon-orange: #ff9900;
+    --dark-purple: #1a0033;
+    --cabinet-color: #222222;
+}
+
+/* All other styles scoped to the home-component class */
+.home-component .arcade-container {
+    background-color: var(--dark-purple);
+    min-height: 90vh;
+    padding: 20px;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    background-image: 
+        radial-gradient(rgba(255, 0, 255, 0.3) 2px, transparent 2px),
+        radial-gradient(rgba(0, 255, 255, 0.3) 2px, transparent 2px);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 25px;
+    display: block;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.home-component .arcade-cabinet {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: var(--cabinet-color);
+    border-radius: 20px 20px 0 0;
+    padding: 30px;
+    box-shadow: 
+        0 0 10px var(--neon-pink),
+        0 0 20px var(--neon-blue),
+        0 0 30px var(--neon-green);
+    position: relative;
+    overflow: hidden;
+}
+
+.home-component .arcade-cabinet::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: linear-gradient(90deg, 
+        var(--neon-pink), 
+        var(--neon-blue), 
+        var(--neon-green), 
+        var(--neon-yellow), 
+        var(--neon-orange));
+    background-size: 200% 100%;
+    animation: rainbow 3s linear infinite;
+}
+
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.home-component .screen {
+    background-color: var(--dark-purple);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 3px solid #444;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+    position: relative;
+    overflow: auto;
+}
+
+.home-component .screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.1),
+            rgba(0, 0, 0, 0.1) 1px,
+            transparent 1px,
+            transparent 2px
+        );
+    pointer-events: none;
+    z-index: 1;
+}
+
+.home-component .screen-content {
+    position: relative;
+    z-index: 2;
+}
+
+.home-component .neon-text {
+    font-size: 3rem;
+    text-align: center;
+    margin: 20px 0 40px;
+    color: white;
+    text-shadow: 
+        0 0 5px var(--neon-blue),
+        0 0 10px var(--neon-blue),
+        0 0 20px var(--neon-blue),
+        0 0 40px var(--neon-blue);
+    animation: flicker 3s infinite alternate;
+}
+
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 
+            0 0 5px var(--neon-blue),
+            0 0 10px var(--neon-blue),
+            0 0 20px var(--neon-blue),
+            0 0 40px var(--neon-blue);
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+
+.home-component .game-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.home-component .game-card {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-component .game-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent
+    );
+    animation: rotate 4s linear infinite;
+    z-index: -1;
+}
+
+@keyframes rotate {
+    100% { transform: rotate(1turn); }
+}
+
+.home-component .snake-card {
+    border-color: var(--neon-green);
+}
+
+.home-component .frogger-card {
+    border-color: var(--neon-green);
+}
+
+.home-component .minesweeper-card {
+    border-color: var(--neon-orange);
+}
+
+.home-component .mastermind-card {
+    border-color: var(--neon-pink);
+}
+
+.home-component .game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 
+        0 0 10px currentColor,
+        0 0 20px currentColor;
+}
+
+.home-component .game-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.home-component .game-card h3 {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.home-component .game-card p {
+    font-size: 0.6rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.home-component .play-btn {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    transition: all 0.3s ease;
+    border: 1px solid currentColor;
+}
+
+.home-component .play-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.home-component .welcome-message, .home-component .for-devs {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-left: 5px solid var(--neon-blue);
+}
+
+.home-component .for-devs {
+    border-left-color: var(--neon-green);
+}
+
+.home-component .welcome-message h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--neon-blue);
+}
+
+.home-component .welcome-message p, .home-component .for-devs p {
+    font-size: 0.7rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.home-component .for-devs h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: var(--neon-green);
+}
+
+.home-component .cabinet-details {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.home-component .joystick {
+    width: 60px;
+    height: 60px;
+    background-color: #333;
+    border-radius: 50%;
+    border: 5px solid #444;
+    position: relative;
+}
+
+.home-component .joystick::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: #666;
+    border-radius: 50%;
+}
+
+.home-component .buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.home-component .button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ff0000, #990000);
+    box-shadow: 0 5px 0 #660000;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.home-component .button:nth-child(2) {
+    background: radial-gradient(circle at 30% 30%, #ffff00, #999900);
+    box-shadow: 0 5px 0 #666600;
+}
+
+.home-component .button:nth-child(3) {
+    background: radial-gradient(circle at 30% 30%, #00ff00, #009900);
+    box-shadow: 0 5px 0 #006600;
+}
+
+.home-component .button:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #660000;
+}
+
+.home-component .coin-slot {
+    background-color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 2px solid #444;
+    font-size: 0.7rem;
+    color: var(--neon-yellow);
+    animation: blink 2s infinite;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.home-component .coin-slot.inserted {
+    background-color: #666;
+    transform: translateY(2px);
+    box-shadow: inset 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+@keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0.5; }
+}
+
+.home-component .arcade-link {
+    color: var(--neon-green);
+    text-decoration: none;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.home-component .arcade-link:hover {
+    text-shadow: 0 0 10px var(--neon-green);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .home-component .game-list {
+        gap: 15px;
+    }
+    
+    .home-component .game-card {
+        width: 160px;
+    }
+    
+    .home-component .neon-text {
+        font-size: 2rem;
+    }
+    
+    .home-component .cabinet-details {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-component .game-list {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .home-component .game-card {
+        width: 90%;
+        max-width: 250px;
+    }
+    
+    .home-component .neon-text {
+        font-size: 1.5rem;
+    }
+}
